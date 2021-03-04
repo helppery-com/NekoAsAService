@@ -1,0 +1,40 @@
+### List containers
+GET http://localhost:3000/rooms
+
+### Create room 1
+POST http://localhost:3000/neko
+Content-Type: application/json
+
+{
+  "settings" : {
+    "NEKO_BIND": ":9080",
+    "NEKO_EPR": "59000-59100",
+    "NEKO_PASSWORD": "neko",
+    "NEKO_PASSWORD_ADMIN": "admin"
+  }
+}
+
+### Create room 2
+POST http://localhost:3000/neko
+Content-Type: application/json
+
+{
+  "settings" : {
+    "NEKO_BIND": ":9081",
+    "NEKO_EPR": "59101-59200",
+    "NEKO_PASSWORD": "neko",
+    "NEKO_PASSWORD_ADMIN": "admin"
+  }
+}
+
+### Test room 1
+GET http://localhost:9080
+
+### Test room 2
+GET http://localhost:9081
+
+### Delete room 1
+DELETE http://localhost:3000/neko/neko_9080
+
+### Delete room 2
+DELETE http://localhost:3000/neko/neko_9081
