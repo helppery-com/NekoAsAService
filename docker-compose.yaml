@@ -1,0 +1,19 @@
+version: "2.0"
+services:
+  naas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: helppery-com/naas:latest
+    ports:
+      - "3000:3000"
+    environment:
+      NAAS_TOKEN: DONT_USE_THIS_TOKEN
+      NAAS_PORT: 3000
+      NAAS_TCP_LOWERBOUND: 9000
+      NAAS_TCP_UPPERBOUND: 10000
+      NAAS_UDP_LOWERBOUND: 59000
+      NAAS_UDP_UPPERBOUND: 65000
+      NAAS_IMAGE: m1k1o/neko:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

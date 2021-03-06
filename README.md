@@ -37,7 +37,17 @@ Bearer authentication
   |NAAS_UDP_UPPERBOUND|Upper bound for Neko UDP EPR port|65000|
   |NAAS_IMAGE||m1k1o/neko:latest|
 ## Run
-  `npm run dev`
+  `npm run service`
 ## Test
 
  `npm run test`
+
+ ## docker
+
+### Build
+
+    docker-compose build
+
+### run
+
+    docker-compose up -d

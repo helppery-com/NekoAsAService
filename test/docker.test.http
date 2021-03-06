@@ -1,0 +1,35 @@
+### List containers
+GET http://localhost:3000/api/rooms
+Authorization: Bearer DONT_USE_THIS_TOKEN
+
+### Get mapped ports
+GET http://localhost:3000/api/ports
+Authorization: Bearer DONT_USE_THIS_TOKEN
+
+### Get free port
+POST http://localhost:3000/api/ports/free
+Authorization: Bearer DONT_USE_THIS_TOKEN
+Content-Type: application/json
+
+{ 
+  "protocol": "tcp",
+  "lowerBound": 9000,
+  "count": 1,
+  "upperBound": 10000
+}
+
+### Create room 1
+POST http://localhost:3000/api/neko
+Authorization: Bearer DONT_USE_THIS_TOKEN
+Content-Type: application/json
+
+{
+  "maxMembers": 10
+}
+
+### Test room 1
+GET http://localhost:9000
+
+### Delete room 1
+DELETE http://localhost:3000/api/neko/neko_9000
+Authorization: Bearer DONT_USE_THIS_TOKEN

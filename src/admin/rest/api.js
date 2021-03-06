@@ -7,10 +7,10 @@ class Api {
   constructor (rest) {
     this.rest = rest
 
-    this.NAAS_TCP_LOWERBOUND = process.env.NAAS_TCP_LOWERBOUND || 9000
-    this.NAAS_TCP_UPPERBOUND = process.env.NAAS_TCP_UPPERBOUND || 10000
-    this.NAAS_UDP_LOWERBOUND = process.env.NAAS_UDP_LOWERBOUND || 59000
-    this.NAAS_UDP_UPPERBOUND = process.env.NAAS_UDP_UPPERBOUND || 65000
+    this.NAAS_TCP_LOWERBOUND = parseInt(process.env.NAAS_TCP_LOWERBOUND || 9000)
+    this.NAAS_TCP_UPPERBOUND = parseInt(process.env.NAAS_TCP_UPPERBOUND || 10000)
+    this.NAAS_UDP_LOWERBOUND = parseInt(process.env.NAAS_UDP_LOWERBOUND || 59000)
+    this.NAAS_UDP_UPPERBOUND = parseInt(process.env.NAAS_UDP_UPPERBOUND || 65000)
     this.NAAS_IMAGE = process.env.NAAS_IMAGE || 'm1k1o/neko:latest'
 
     this.rest.get('/api/test', this.mep(this.test))
@@ -22,9 +22,10 @@ class Api {
   }
 
   checkToken (req) {
-    const auth = req.headers.authentication || ""
-    if (auth.split('Bearer ')[1] !== NAAS_TOKEN) {
-      throw new Error('Not authorized')
+    const auth = req.headers.authorization || ""
+    const token = auth.split('Bearer ')[1]
+    if (token !== NAAS_TOKEN) {
+      throw new Error( `Not authorized, expected  ${NAAS_TOKEN} got ${token} from ${auth}`)
     }
   }
 
@@ -42,6 +43,7 @@ class Api {
           $ctx: this
         }))
       } catch (ex) {
+        console.error('Error processing request', req.url, req.body, req.headers, ex)
         res.internalServerError(ex)
       }
     }).bind(this)
@@ -92,12 +94,11 @@ class Api {
   }
 
   async getFreePort({ protocol, lowerBound, count, upperBound }) {
-    console.log('getFreePort', protocol, lowerBound, count, upperBound)
     const ports = await this.getMappedPorts()
     const list = ports[protocol]
     while(lowerBound < upperBound) {
       if (list.indexOf(lowerBound) === -1) {
-        let fullRange = lowerBound + count
+        let fullRange = lowerBound + count - 1
         while(fullRange > lowerBound) {
           if(list.indexOf(fullRange) !== -1) {
             break

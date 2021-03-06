@@ -25,7 +25,7 @@ const get = async (path, auth) => {
   return await asyncReq('get', {
       url: `${baseUrl}${path}`,
       headers: {
-        Authentication: `Bearer ${auth === false ? '': 'DONT_USE_THIS_TOKEN' }`
+        Authorization: `Bearer ${auth === false ? '': 'DONT_USE_THIS_TOKEN' }`
       }
     })
 }
@@ -34,7 +34,7 @@ const _delete = async (path, auth) => {
   return await asyncReq('delete', {
       url: `${baseUrl}${path}`,
       headers: {
-        Authentication: `Bearer ${auth === false ? '': 'DONT_USE_THIS_TOKEN' }`
+        Authorization: `Bearer ${auth === false ? '': 'DONT_USE_THIS_TOKEN' }`
       }
     })
 }
@@ -43,7 +43,7 @@ const post = async (path, json, auth) => {
   return await asyncReq('post', {
       url: `${baseUrl}${path}`,
       headers: {
-        Authentication: `Bearer ${auth === false ? '': 'DONT_USE_THIS_TOKEN' }`
+        Authorization: `Bearer ${auth === false ? '': 'DONT_USE_THIS_TOKEN' }`
       },
       json
     })

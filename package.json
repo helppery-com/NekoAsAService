@@ -4,7 +4,7 @@
   "description": "NaaS Neko as a Service",
   "main": "src/index.js",
   "scripts": {
-    "dev": "node src/index.js",
+    "service": "node src/index.js",
     "test": "./node_modules/.bin/mocha --reporter dot --slow 5000 --colors"
   },
   "author": "",
