@@ -1,6 +1,7 @@
-const app = require('../server')
 const expressRest = require('express-rest')
-const rest = expressRest(app)
 const Api = require('./api')
 
-new Api(rest)
+module.exports = function (server) {
+  const rest = expressRest(server)
+  new Api(rest)
+}
