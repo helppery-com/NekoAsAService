@@ -79,6 +79,7 @@ Prtovide a JSON file with the tokens allowed and limitations
  * https://github.com/FiloSottile/mkcert
 # docker
 
+> Requires: docker-compose version 1.27.4, build 40524192
 ### Build
 
     docker-compose build

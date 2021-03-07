@@ -3,8 +3,6 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const { makeid } = require('../../utils')
 
-const NAAS_TOKEN = process.env.NAAS_AUTH_TONE || 'DONT_USE_THIS_TOKEN'
-
 class Api {
   constructor (rest, tokens) {
     this.tokens = tokens
@@ -29,7 +27,7 @@ class Api {
     const auth = req.headers.authorization || ""
     const token = auth.split('Bearer ')[1]
     if (!this.tokens[token]) {
-      throw new Error( `Not authorized, expected  ${NAAS_TOKEN} got ${token} from ${auth}`)
+      throw new Error( `Not authorized`)
     }
     return { $id: token, ...this.tokens[token] }
   }
