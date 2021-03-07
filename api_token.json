@@ -1,0 +1,10 @@
+{
+  "DONT_USE_THIS_TOKEN": {
+    "concurrent": 1,
+    "maxUsers": 2
+  },
+  "NEITHER_THIS_ONE": {
+    "concurrent": 2,
+    "maxUsers": 4
+  }
+}

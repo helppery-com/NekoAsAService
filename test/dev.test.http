@@ -1,5 +1,5 @@
 ### List containers
-GET https://localhost:9443/api/rooms
+GET http://localhost:3000/api/rooms
 Authorization: Bearer DONT_USE_THIS_TOKEN
 
 ### Get mapped ports
@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ### Create room 1
-POST https://localhost:9443/api/neko
+POST http://localhost:3000/api/neko
 Authorization: Bearer DONT_USE_THIS_TOKEN
 Content-Type: application/json
 
@@ -32,6 +32,6 @@ Content-Type: application/json
 GET https://neko_10.A.localhost:9443
 
 ### Delete room 1
-DELETE https://localhost:9443/api/neko/neko_9001
+DELETE https://localhost:9443/api/neko/neko_10.A
 Authorization: Bearer DONT_USE_THIS_TOKEN
 

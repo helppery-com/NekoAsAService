@@ -1,12 +1,27 @@
 version: "2.0"
 services:
+  nginx:
+    restart: always
+    image: nginx:latest
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/logs:/var/log/nginx
+      - $NAAS_CERT:/cert/cert.pem
+      - $NAAS_PRIVKEY:/cert/privkey.pem
+    depends_on:
+      - naas
+    ports:
+      - "${NAAS_HTTP:-9000}:80"
+      - "${NAAS_HTTPS:-9443}:443"
+    networks:
+      - naas
   naas:
+    container_name: naas
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
     image: helppery-com/naas:latest
-    ports:
-      - "3000:3000"
     environment:
       NAAS_TOKEN: DONT_USE_THIS_TOKEN
       NAAS_PORT: 3000
@@ -15,5 +30,13 @@ services:
       NAAS_UDP_LOWERBOUND: 59000
       NAAS_UDP_UPPERBOUND: 65000
       NAAS_IMAGE: m1k1o/neko:latest
+      NAAS_NETWORK: naas
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - naas
+
+networks:
+  naas:
+    name: naas
+    driver: bridge
